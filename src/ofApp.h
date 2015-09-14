@@ -1,6 +1,7 @@
 #pragma once
 
 #include "ofMain.h"
+#include "ofxSpout2.h"
 
 class ofApp : public ofBaseApp{
 
@@ -8,6 +9,8 @@ class ofApp : public ofBaseApp{
 		void setup();
 		void update();
 		void draw();
+		
+		void exit();
 
 		void keyPressed(int key);
 		void keyReleased(int key);
@@ -19,4 +22,9 @@ class ofApp : public ofBaseApp{
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
 		
+		ofImage snow;
+		ofImage kitten;
+		ofFbo fbo;
+
+		ofxSpout2 spout;
 };
