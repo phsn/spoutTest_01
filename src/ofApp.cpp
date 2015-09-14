@@ -3,9 +3,9 @@
 //--------------------------------------------------------------
 void ofApp::setup(){
 	ofSetFrameRate(60);
-	kitten = ofImage("kitten.jpg");
-	snow = ofImage("snow.jpg");
-	fbo.allocate(kitten.width + snow.width, snow.height);
+	ofEnableAntiAliasing();
+	ofEnableSmoothing();
+	fbo.allocate(ofGetWidth()*2, ofGetHeight()*2);
 }
 
 //--------------------------------------------------------------
@@ -13,26 +13,25 @@ void ofApp::update(){
 	//generate some content
 	fbo.begin();
 	ofClear(0,0,0,255);
-	kitten.draw(0,0);
-	ofDrawBitmapString("OF Frame " + ofToString(ofGetFrameNum()),10,kitten.height + 30);
-	ofTranslate(kitten.width, 0);
-	ofSetColor((ofGetElapsedTimeMillis()/10)%255, (ofGetElapsedTimeMillis()/11)%255, (ofGetElapsedTimeMillis()/13)%255); 
-	snow.draw(0,0);
+	ofSetCircleResolution(35);
+	ofSetColor(255,0,0);
+	ofFill();
+	ofCircle(ofGetMouseX()*2,ofGetMouseY()*2,50);
 	fbo.end();
 
 
 
 	//Spout
-	spout.sendTexture(kitten.getTextureReference(), "kitten");
-	spout.sendTexture(snow.getTextureReference(), "snow");
+	//spout.sendTexture(kitten.getTextureReference(), "kitten");
+	//spout.sendTexture(snow.getTextureReference(), "snow");
 	spout.sendTexture(fbo.getTextureReference(), "composition");
 }
 
 //--------------------------------------------------------------
 void ofApp::draw(){
-	ofSetColor(255);
-	ofClear(0,0,0,255);
-	fbo.draw(0,0);
+	//ofSetColor(255);
+	//ofClear(0,0,0,255);
+	fbo.draw(0,0,ofGetWidth(),ofGetHeight());
 
 }
 
